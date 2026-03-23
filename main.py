@@ -5,6 +5,7 @@ from openai import OpenAI
 from dotenv import load_dotenv
 from evaluator import evaluate_response
 from regression import compare_models
+from evaluators.judge import judge_response
 
 load_dotenv()
 
@@ -32,16 +33,40 @@ for test in test_cases:
     print("Running:", test["id"])
 
     response_v1 = get_ai_response(test["prompt"], model_v1)
+    judge_v1 = judge_response(test["prompt"], response_v1, test["expected"])
     score_v1, hallucination_v1 = evaluate_response(response_v1, test["expected_answer"])
 
     response_v2 = get_ai_response(test["prompt"], model_v2)
+    judge_v2 = judge_response(test["prompt"], response_v2, test["expected"])
     score_v2, hallucination_v2 = evaluate_response(response_v2, test["expected_answer"])
 
     comparison_result = compare_models(score_v1, score_v2)
 
     results.append({
-        "Test ID": test["id"],
-        **comparison_result
+    "Test ID": test["id"],
+    
+    # Prompt
+    "prompt": test["prompt"],
+
+    # Model responses
+    "response_v1": response_v1,
+    "response_v2": response_v2,
+
+    # Scores
+    "score_v1": score_v1,
+    "score_v2": score_v2,
+
+    # Hallucination
+    "hallucination_v1": hallucination_v1,
+    "hallucination_v2": hallucination_v2,
+
+    # Judge (NEW 🔥)
+    "judge_v1": judge_v1,
+    "judge_v2": judge_v2,
+
+    # Comparison result
+    **comparison_result
+
     })
 
 df = pd.DataFrame(results)
