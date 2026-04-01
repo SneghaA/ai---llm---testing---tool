@@ -1,8 +1,7 @@
 # 🤖 AI LLM Evaluation Tool
 
 ## 🚀 Overview
-A Python-based framework to evaluate, compare, and monitor responses from Large Language Models (LLMs).  
-This tool automates prompt testing, scoring, hallucination detection, and model performance analysis.
+Built a Python-based framework to evaluate, compare, and monitor responses from Large Language Models (LLMs) using real test cases. It runs prompts from a dataset, score responses, and checks for hallucinations.
 
 ---
 
