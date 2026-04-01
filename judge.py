@@ -20,9 +20,9 @@ Score: X
 Reason: ...
 """
 
-    result = openai.ChatCompletion.create(
+    result = openai.chat.completions.create(
         model="gpt-4",
         messages=[{"role": "user", "content": judge_prompt}]
     )
 
-    return result['choices'][0]['message']['content']
+    return result.choices[0].message.content

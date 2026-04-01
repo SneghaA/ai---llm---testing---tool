@@ -5,12 +5,10 @@ from openai import OpenAI
 from dotenv import load_dotenv
 from evaluator import evaluate_response
 from regression import compare_models
-from evaluators.judge import judge_response
+from judge import judge_response
 
 load_dotenv()
-
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
+client=OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 def get_ai_response(prompt, model_name):
     response = client.chat.completions.create(
         model=model_name,
@@ -19,8 +17,6 @@ def get_ai_response(prompt, model_name):
         ]
     )
     return response.choices[0].message.content
-
-
 
 with open("test_cases.json", "r") as file:
     test_cases = json.load(file)
@@ -33,11 +29,11 @@ for test in test_cases:
     print("Running:", test["id"])
 
     response_v1 = get_ai_response(test["prompt"], model_v1)
-    judge_v1 = judge_response(test["prompt"], response_v1, test["expected"])
+    judge_v1 = judge_response(test["prompt"], response_v1, test["expected_answer"])
     score_v1, hallucination_v1 = evaluate_response(response_v1, test["expected_answer"])
 
     response_v2 = get_ai_response(test["prompt"], model_v2)
-    judge_v2 = judge_response(test["prompt"], response_v2, test["expected"])
+    judge_v2 = judge_response(test["prompt"], response_v2, test["expected_answer"])
     score_v2, hallucination_v2 = evaluate_response(response_v2, test["expected_answer"])
 
     comparison_result = compare_models(score_v1, score_v2)

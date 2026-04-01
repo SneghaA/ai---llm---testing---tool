@@ -1,53 +1,41 @@
-# AI LLM Evaluation Tool
+# 🤖 AI LLM Evaluation Tool
 
-This project is a Python-based testing framework designed to evaluate responses from Large Language Models (LLMs).
-
-The system automatically runs prompt test cases against AI models and analyzes responses using automated scoring and hallucination detection rules.
-
----
-
-## Features
-
-• Prompt evaluation system  
-• Response scoring engine  
-• Hallucination detection  
-• Toxicity detection  
-• Model regression comparison  
-• Performance drift monitoring  
-• Automated CSV test reports  
+## 🚀 Overview
+A Python-based framework to evaluate, compare, and monitor responses from Large Language Models (LLMs).  
+This tool automates prompt testing, scoring, hallucination detection, and model performance analysis.
 
 ---
 
-## Project Structure
+## 🧠 Version 1 – Basic LLM Evaluation Tool
+
+- Prompt testing using JSON dataset  
+- Single model response evaluation  
+- Rule-based scoring (keyword match, response length)  
+- Basic hallucination detection  
+- Toxicity detection  
+- Automated CSV report generation  
+
+---
+
+## 🚀 Version 2 – Advanced LLM Evaluation Framework
+
+- Multi-model comparison (Model V1 vs Model V2)  
+- Semantic similarity scoring using embeddings  
+- LLM-as-a-Judge for qualitative evaluation  
+- Hybrid scoring (rule-based + semantic + judge)  
+- Regression testing (improved / degraded / tie cases)  
+- Performance drift monitoring (%)  
+- Detailed CSV reporting with comparison metrics  
+
+---
+
+## 🏗️ Project Structure
 
 main.py → Runs test suite  
 evaluator.py → Response evaluation logic  
+metrics.py → Semantic similarity scoring  
 regression.py → Model comparison  
-metrics.py → Performance metrics  
-test_cases.json → Prompt test dataset  
-test_report.csv → Generated test results  
+evaluators/judge.py → LLM-based judging  
+test_cases.json → Prompt dataset  
+test_report.csv → Generated results  
 
----
-
-## Example Test Results
-
-Total Tests: 6  
-Improved Cases: 0  
-Degraded Cases: 0  
-Performance Drift: 0%
-
----
-
-## Technologies Used
-
-Python  
-OpenAI API  
-Pandas  
-JSON test datasets  
-
----
-
-## Purpose
-
-This tool demonstrates how QA engineers can test AI systems, detect hallucinations, and monitor model performance across versions.
-Updated by Sneha
